@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - New Account</title>
+    <link rel="icon" href="{{ url_for('static',filename='Favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}" type="text/css">
+</head>
+<body>
+<br/>
+<h1>Blog</h1>
+<form method="post" action="/newaccount">
+    New Username: <input type="text" name="username"><br/>
+    New Password: <input type="password" name="password"><br/>
+    <input type="submit" name="newaccount" value="Create Account and Sign In">
+</form>
+<p>{{message}}</p>
+</body>
+</html>

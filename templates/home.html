@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - Home</title>
+    <link rel="icon" href="{{ url_for('static',filename='Favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}" type="text/css">
+</head>
+<body>
+{% if username == "" %}
+<br/>
+{% else %}
+<p align="right" id="username">{{username}}</p> <!-- Username -->
+{% endif %}
+<h1>Blog</h1>
+<hr>
+{% for post in posts %}
+<h2>{{ post.title }}</h2>
+<p>By {{ post.author }} on {{ post.date_posted }}</p>
+<p> {{ post.content }}</p>
+{% if signedin %}
+<form method="post" action="/comment">
+    <textarea placeholder="Enter Comment Here..." name="comment"></textarea><br/>
+    <input type="submit" name="submit" value="New Comment">
+    <input type="hidden" name="id" value="{{ post.id }}">
+</form>
+{% endif %}
+{% for comment in post.comments %}
+<hr>
+<p id="comment">{{ comment }}</p>
+{% endfor %}
+<hr>
+{% endfor %}
+{% if signedin %}
+<form method="post" action="/userfunctions">
+    <input type="submit" name="button" value="Create New Post"><br/>
+    <input type="submit" name="button" value="Log Out">
+</form>
+{% else %}
+<form method="post" action="/gotologin">
+    <input type="submit" name="login" value="New Account"><br/>
+    <input type="submit" name="login" value="Log In">
+</form>
+{% endif %}
+</body>
+</html>
